@@ -7,18 +7,20 @@ import { LessonModule } from "./lesson/lesson.module";
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: "mongodb",
+      url: "mongodb://admin:root@localhost:27017", // Corrected URL format
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      entities: [Lesson],
+      synchronize: true,
+    }),
+
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: true,
       driver: ApolloDriver,
     }),
     LessonModule,
-    TypeOrmModule.forRoot({
-      type: "mongodb",
-      url: "mongodb://localhost:root:root:27017/school",
-      synchronize: true,
-      useUnifiedTopology: true,
-      entities: [Lesson],
-    }),
   ],
   controllers: [],
   providers: [],
