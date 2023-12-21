@@ -4,6 +4,8 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Lesson } from "./lesson/lesson.entity";
 import { LessonModule } from "./lesson/lesson.module";
+import { Student } from "./student/student.entity";
+import { StudentModule } from "./student/student.module";
 
 @Module({
   imports: [
@@ -12,7 +14,7 @@ import { LessonModule } from "./lesson/lesson.module";
       url: "mongodb://admin:root@localhost:27017", // Corrected URL format
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      entities: [Lesson],
+      entities: [Lesson, Student],
       synchronize: true,
     }),
 
@@ -21,6 +23,7 @@ import { LessonModule } from "./lesson/lesson.module";
       driver: ApolloDriver,
     }),
     LessonModule,
+    StudentModule,
   ],
   controllers: [],
   providers: [],
